@@ -1,0 +1,25 @@
+{
+    "robot.language-server.python": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "robot.pythonpath": [
+        "${workspaceFolder}"
+    ],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#3a403a6b",
+        "editor.foldBackground": "#3a403a6b"
+    },
+    "[python]": {
+        "editor.rulers": [
+            {"column": 79, "color": "#41524cce"},
+            {"column": 88, "color": "#41524cce"},
+        ]
+    },
+    "[robotframework]": {
+        "editor.rulers": [
+            {"column": 88, "color": "#41524cce"},
+            {"column": 120, "color": "#41524cce"},
+        ]
+    },
+    "robotcode.robot.variables": {
+        "ROOT": "C:/github/fasttrack"
+    }
+}
