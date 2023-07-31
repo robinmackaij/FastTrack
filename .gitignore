@@ -1,3 +1,6 @@
+# local db file
+workshop.db
+
 # VS Code personal settings
 .vscode/settings.json
 .vscode/launch.json
