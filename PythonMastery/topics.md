@@ -12,3 +12,4 @@
 * virtual environments
 * variable scopes
 * iPython / Jupyter notebook
+* positional and named arguments
