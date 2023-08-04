@@ -1,0 +1,1 @@
+* Get a list of all enums from the openapi.json

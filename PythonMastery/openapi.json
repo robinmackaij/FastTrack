@@ -1,0 +1,657 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/authors": {
+            "get": {
+                "summary": "Get Authors ",
+                "operationId": "get_authors__authors_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/AuthorResource"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get Authors  Authors Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Author ",
+                "operationId": "create_author__authors_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Author"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthorResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authors/{author_id}": {
+            "get": {
+                "summary": "Get Author ",
+                "operationId": "get_author__authors__author_id__get",
+                "parameters": [
+                    {
+                        "name": "author_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "The ID of the author to get."
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthorResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Author ",
+                "operationId": "delete_author__authors__author_id__delete",
+                "parameters": [
+                    {
+                        "name": "author_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Author Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authors/{author_id}/portraits": {
+            "get": {
+                "summary": "Get Author Portrait ",
+                "operationId": "get_author_portrait__authors__author_id__portraits_get",
+                "parameters": [
+                    {
+                        "name": "author_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Author Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authors/{author_id}/upload_portrait": {
+            "post": {
+                "summary": "Post Portait",
+                "operationId": "post_portait_authors__author_id__upload_portrait_post",
+                "parameters": [
+                    {
+                        "name": "author_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Author Id"
+                        }
+                    },
+                    {
+                        "name": "replace",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Replace"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_post_portait_authors__author_id__upload_portrait_post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/poems": {
+            "get": {
+                "summary": "Get Poems ",
+                "operationId": "get_all_poems",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Poem"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get All Poems"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Poem ",
+                "operationId": "create_poem__poems_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewPoem"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Poem"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/poems/{poem_id}": {
+            "get": {
+                "summary": "Get Poem ",
+                "operationId": "get_poem__poems__poem_id__get",
+                "parameters": [
+                    {
+                        "name": "poem_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Poem Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Poem"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Poem ",
+                "operationId": "delete_poem__poems__poem_id__delete",
+                "parameters": [
+                    {
+                        "name": "poem_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Poem Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Detail"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Author": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "name",
+                        "title": "The author's name"
+                    },
+                    "species": {
+                        "$ref": "#/components/schemas/Species"
+                    },
+                    "bio": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "maxLength": 400
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "format": "text",
+                        "title": "A short description of the life and work of the author."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "species"
+                ],
+                "title": "Author",
+                "example": {
+                    "bio": "HAL is a HAL 9000 computer with a human personality.HAL is capable of many functions, such as speech, speech recognition, facial recognition, lip-reading, interpreting emotions, expressing emotions, and chess, in addition to maintaining all systems on Discovery. HAL speaks in a soothing male voice, always using a calm tone.",
+                    "name": "HAL",
+                    "species": "robot"
+                }
+            },
+            "AuthorResource": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "name",
+                        "title": "The author's name"
+                    },
+                    "species": {
+                        "$ref": "#/components/schemas/Species"
+                    },
+                    "bio": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "maxLength": 400
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "format": "text",
+                        "title": "A short description of the life and work of the author."
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "species"
+                ],
+                "title": "AuthorResource",
+                "description": "Author class",
+                "example": {
+                    "bio": "HAL is a HAL 9000 computer with a human personality.HAL is capable of many functions, such as speech, speech recognition, facial recognition, lip-reading, interpreting emotions, expressing emotions, and chess, in addition to maintaining all systems on Discovery. HAL speaks in a soothing male voice, always using a calm tone.",
+                    "name": "HAL",
+                    "species": "robot"
+                }
+            },
+            "Body_post_portait_authors__author_id__upload_portrait_post": {
+                "properties": {
+                    "uploaded_file": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "Uploaded File"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uploaded_file"
+                ],
+                "title": "Body_post_portait_authors__author_id__upload_portrait_post"
+            },
+            "Detail": {
+                "properties": {
+                    "detail": {
+                        "type": "string",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "detail"
+                ],
+                "title": "Detail",
+                "description": "Class for API message details."
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "NewPoem": {
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "content": {
+                        "type": "string",
+                        "title": "Content"
+                    },
+                    "author_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Author Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "title",
+                    "content",
+                    "author_id"
+                ],
+                "title": "NewPoem"
+            },
+            "Poem": {
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "content": {
+                        "type": "string",
+                        "title": "Content"
+                    },
+                    "author_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Author Id"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "title",
+                    "content",
+                    "author_id"
+                ],
+                "title": "Poem",
+                "description": "Poem class"
+            },
+            "Species": {
+                "type": "string",
+                "enum": [
+                    "human",
+                    "robot",
+                    "unknown"
+                ],
+                "title": "Species"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
