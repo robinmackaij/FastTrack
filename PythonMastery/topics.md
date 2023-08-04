@@ -11,3 +11,4 @@
 * importing and namespaces
 * virtual environments
 * variable scopes
+* iPython / Jupyter notebook
