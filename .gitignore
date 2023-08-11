@@ -1,5 +1,13 @@
+# Robot Framework logs
+log.html
+output.xml
+report.html
+
 # local db file
 workshop.db
+
+# local test files
+portraits
 
 # VS Code personal settings
 .vscode/settings.json

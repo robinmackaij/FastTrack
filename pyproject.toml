@@ -26,6 +26,8 @@ pydantic = "^2.1.0"
 python-multipart = "^0.0.5"
 PyYAML = "^6.0"
 robotframework = "^6.0.0"
+robotframework-requests = "^0.9.4"
+robotframework-openapidriver = "^4.2.1"
 
 [tool.poetry.group.dev.dependencies]
 invoke = "2.2.0"

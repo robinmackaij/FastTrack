@@ -135,8 +135,13 @@ def post_portait(
                 "replace the existing portrait, use the `replace` parameter."
             ),
         ) from None
+
     content_type = uploaded_file.content_type
-    extension = content_type.rsplit("/", maxsplit=1)[-1]
+    if not content_type:
+        extension = "unknown"
+    else:
+        extension = content_type.rsplit("/", maxsplit=1)[-1]
+
     portrait_file_path = PORTRAITS_FOLDER / f"{author_id}_portrait.{extension}"
     with open(portrait_file_path, mode="wb+") as portrait_file:
         portrait_file.write(uploaded_file.file.read())
